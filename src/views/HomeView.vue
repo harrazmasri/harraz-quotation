@@ -14,9 +14,9 @@
 						:class="quotationData.landing_page.checked? 'border-[#FFDD53]':'border-gray-400'"
 					>
 						Landing Page
-						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/src/assets/images/landing1.png" alt="">
+						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/harraz-quotation/src/assets/images/landing1.png" alt="">
 						<div class="bg-black w-fit rounded-xl overflow-clip">
-							<img draggable="false" class="object-cover w-full aspect-video" src="/src/assets/images/landing2.png" alt="">
+							<img draggable="false" class="object-cover w-full aspect-video" src="/harraz-quotation/src/assets/images/landing2.png" alt="">
 						</div>
 					</div>
 					<div 
@@ -26,8 +26,8 @@
 						:class="quotationData.ecommerce.checked? 'border-[#FFDD53]':'border-gray-400'"
 					>
 						Ecommerce
-						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/src/assets/images/ecommerce1.png" alt="">
-						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/src/assets/images/ecommerce2.png" alt="">
+						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/harraz-quotation/src/assets/images/ecommerce1.png" alt="">
+						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/harraz-quotation/src/assets/images/ecommerce2.png" alt="">
 					</div>
 					<div 
 						@click="quotationData.custom.checked=!quotationData.custom.checked;quotationData.ecommerce.checked=false; calculate()" 
@@ -36,8 +36,8 @@
 						:class="quotationData.custom.checked? 'border-[#FFDD53]':'border-gray-400'"
 					>
 						Custom Web
-						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/src/assets/images/custom1.png" alt="">
-						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/src/assets/images/custom2.png" alt="">
+						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/harraz-quotation/src/assets/images/custom1.png" alt="">
+						<img draggable="false" class="object-cover w-full aspect-video rounded-xl" src="/harraz-quotation/src/assets/images/custom2.png" alt="">
 					</div>
 				</div>
 
