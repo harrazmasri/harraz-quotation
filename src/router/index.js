@@ -2,11 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  // history: createWebHistory(),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/harraz-quotation/'),
   routes: [
     {
-      path: '/harraz-quotation/',
+      path: '/',
       name: 'home',
       component: HomeView
     },
