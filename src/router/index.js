@@ -6,7 +6,8 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/harraz-quotation/',
+      // path: '/harraz-quotation/',
+      path: '/',
       name: 'home',
       component: HomeView
     },

@@ -173,7 +173,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="py-4 pe-[4rem] h-[5rem] flex items-start justify-between">
+			<div class="py-4 pe-[4rem] h-[5rem] flex lg:flex-row md:flex-row sm:flex-col items-start justify-between">
 				<div class="flex items-center justify-end gap-5">
 					<p>Estimated duration:</p>
 					<p class="text-3xl">{{ totalDays }} Days</p>
