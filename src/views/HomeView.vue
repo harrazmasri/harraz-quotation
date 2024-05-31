@@ -150,7 +150,7 @@
 							<div class="flex items-center gap-3">
 								<input @change="calculate" v-model="quotationData.faster_delivery.checked" type="checkbox" class=" mt-0.5 border-gray-200  rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="faster_delivery">
 								<label for="faster_delivery" class="ms-3 text-md cursor-pointer">Faster Delivery <span class="text-[#F8EFC9]">+RM{{ quotationData.faster_delivery.price }}</span></label>
-								<input @change="calculate" v-model="quotationData.faster_delivery.quantity" type="number" min="1" class="py-3 px-4 bg-gray-900 block w-[7rem] border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+								<input @change="calculate" v-model="quotationData.faster_delivery.quantity" type="number" min="0" class="py-3 px-4 bg-gray-900 block w-[7rem] border border-gray-400 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
 							</div>
 		
 							<div class="flex items-center gap-3">
@@ -173,14 +173,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="py-4 pe-[4rem] lg:h-[5rem] m:h-[5rem] sm:h-[7rem] flex lg:flex-row md:flex-row sm:flex-col items-start justify-between">
+			<div class="py-4 pe-[4rem] lg:h-[5rem] md:h-[5rem] sm:h-[7rem] flex lg:flex-row md:flex-row sm:flex-col items-start lg:justify-between md:justify-between sm:justify-start">
 				<div class="flex items-center justify-end gap-5">
-					<p class="whitespace-nowrap ">Estimated duration:</p>
-					<p class="whitespace-nowrap text-3xl">{{ totalDays }} Days</p>
+					<p class="whitespace-nowrap">Estimated duration:</p>
+					<p class="text-3xl whitespace-nowrap">{{ totalDays }} Days</p>
 				</div>
 				<div class="flex items-center justify-end gap-5">
-					<p class="whitespace-nowrap ">Total:</p>
-					<p class="whitespace-nowrap text-3xl">RM{{ totalAmount }}</p>
+					<p class="whitespace-nowrap">Total:</p>
+					<p class="text-3xl whitespace-nowrap">RM{{ totalAmount }}</p>
 				</div>
 			</div>
 		</div>
