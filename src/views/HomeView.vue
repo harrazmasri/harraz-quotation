@@ -4,7 +4,7 @@
 		<img draggable="false" class="absolute h-screen object-cover" src="https://jooinn.com/images/empty-space-1.png" alt="">
 
 		<div class="relative z-10 w-[80vw] h-[80vh] flex flex-col rounded-xl overflow-clip">
-			<div class="py-4 px-6 text-[#FFDD53] h-[4rem] text-3xl font-semibold">Quotation Calculator</div>
+			<div class="py-4 px-6 text-[#FFDD53] lg:h-[4rem] md:h-[4rem] sm:h-[6rem] text-3xl font-semibold">Quotation Calculator</div>
 			
 			<div class="relative mt-5 h-0 border border-gray-200 bg-gradient-to-br from-[rgba(50,50,50,.3)] to-[rgba(70,70,70,.3)] backdrop-blur-sm rounded-xl grow overflow-x-hidden overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-400">
 				
@@ -173,14 +173,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="py-4 pe-[4rem] h-[5rem] flex lg:flex-row md:flex-row sm:flex-col items-start justify-between">
+			<div class="py-4 pe-[4rem] lg:h-[5rem] m:h-[5rem] sm:h-[7rem] flex lg:flex-row md:flex-row sm:flex-col items-start justify-between">
 				<div class="flex items-center justify-end gap-5">
-					<p>Estimated duration:</p>
-					<p class="text-3xl">{{ totalDays }} Days</p>
+					<p class="whitespace-nowrap ">Estimated duration:</p>
+					<p class="whitespace-nowrap text-3xl">{{ totalDays }} Days</p>
 				</div>
 				<div class="flex items-center justify-end gap-5">
-					<p>Total:</p>
-					<p class="text-3xl">RM{{ totalAmount }}</p>
+					<p class="whitespace-nowrap ">Total:</p>
+					<p class="whitespace-nowrap text-3xl">RM{{ totalAmount }}</p>
 				</div>
 			</div>
 		</div>
