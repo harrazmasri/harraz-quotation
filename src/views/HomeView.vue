@@ -1,9 +1,12 @@
 <template>
 
 	<div ref="printLayout" :class="printLayoutActive?'':'hidden'" class="absolute w-screen min-h-screen h-fit top-0 left-0 z-50 bg-white text-black font-[calibri] px-8 py-6">
-		<h1 class="font-bold text-2xl">Quotation Statement</h1>
+		<div class="w-full flex justify-between items-center">
+			<h1 class="font-bold text-2xl">{{ depositLayoutActive||fullyPaidLayoutActive? 'Invoice' : 'Quotation Statement' }}</h1>
+			<p><span class="font-semibold">Date Issued:</span> {{ currentDate }}</p>
+		</div>
 
-		<div class="mt-5 border rounded-xl border-black">
+		<div v-if="!depositLayoutActive" class="mt-5 border rounded-xl border-gray-500">
 			<div class="w-full p-3 rounded-t-xl text-gray-500 font-semibold bg-gray-100 flex items-center justify-between relative">
 				<p class="w-2/4">Name</p>
 				<p class="w-1/4">Price Per Item</p>
@@ -186,17 +189,55 @@
 						<p class="w-1/4">RM {{ quotationData.custom_web_customization.maintenance.price * quotationData.custom_web_customization.maintenance.quantity }}</p>
 					</div>
 				</div>
+
+				<div v-if="fullyPaidLayoutActive">
+					<div class="mt-3 w-full h-[1px] bg-gray-300"></div>
+					<div v-if="fullyPaidLayoutActive" class="mt-3 w-full flex items-center justify-between relative">
+						<p class="w-2/4">Deposit {{ totalAmount<=500? '80%' : '50%' }}</p>
+						<p class="w-1/4">RM {{ -(totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</p>
+						<p class="w-1/4">RM {{ -(totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</p>
+					</div>
+				</div>
 			</div>
-			<div class="w-full p-3 mt-3 border-t border-black">
+			<div class="w-full p-3 mt-3 border-t border-gray-500">
 				<div class="w-full flex items-center justify-between relative">
 					<p class="w-2/4 text-lg font-bold">Total</p>
 					<p class="w-1/4"></p>
-					<p class="w-1/4 text-lg font-bold">RM {{ totalAmount }}</p>
+					<p v-if="fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount - (totalAmount * (totalAmount<=500? 0.8 : 0.5))).toFixed(2) }}</p>
+					<p v-if="!fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount).toFixed(2) }}</p>
 				</div>
 				<div class="w-full flex items-center justify-between relative">
 					<p class="w-2/4 text-lg font-bold">Estimated delivery time.</p>
 					<p class="w-1/4"></p>
-					<p class="w-1/4 text-lg font-bold">RM {{ totalDays }}</p>
+					<p class="w-1/4 text-lg font-bold">{{ totalDays }} days</p>
+				</div>
+			</div>
+		</div>
+	
+		<div v-if="depositLayoutActive">
+			<div class="mt-5 border rounded-xl border-gray-500">
+				<div class="w-full p-3 rounded-t-xl text-gray-500 font-semibold bg-gray-100 flex items-center justify-between relative">
+					<p class="w-6/12">Item</p>
+					<p class="w-2/12">Quantity</p>
+					<p class="w-2/12">Price</p>
+					<p class="w-2/12">Amount</p>
+				</div>
+
+				<div class="p-3">
+					<div class="flex items-center">
+						<div class="w-6/12">Deposit {{ totalAmount<=500? '80%' : '50%' }}</div>
+						<div class="w-2/12">1</div>
+						<div class="w-2/12">RM {{ (totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</div>
+						<div class="w-2/12">RM {{ (totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</div>
+					</div>
+				</div>
+
+				<div class="w-full p-3 mt-3 border-t border-gray-500">
+					<div class="w-full flex items-center justify-between relative">
+						<p class="w-1/2 text-lg font-bold">Total</p>
+						<p class="w-1/6"></p>
+						<p class="w-1/6 text-lg font-bold">RM {{ (totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -839,11 +880,11 @@
 										class="w-8 h-12 border-r border-white cursor-pointer me-3"
 									></div>
 									<div @click="quotationData.custom_web_customization.payment_gateway.dropdown=!quotationData.custom_web_customization.payment_gateway.dropdown" class="grow text-md cursor-pointer select-none me-3 hover:opacity-75">Payment Gateway</div>
-									<input @change="calculate" v-model="quotationData.custom_web_customization.payment_gateway.quantity" type="number" min="1" class="py-3 px-4 bg-gray-900 block w-[5rem] border-x border-white text-sm focus:outline-0 focus:ring-0 disabled:pointer-events-none">
+									<!-- <input @change="calculate" v-model="quotationData.custom_web_customization.payment_gateway.quantity" type="number" min="1" class="py-3 px-4 bg-gray-900 block w-[5rem] border-x border-white text-sm focus:outline-0 focus:ring-0 disabled:pointer-events-none">
 									<div class="flex h-[3rem]">
 										<div @click="quotationData.custom_web_customization.payment_gateway.quantity > 1 ? quotationData.custom_web_customization.payment_gateway.quantity-- : null; calculate();" :class="quotationData.custom_web_customization.payment_gateway.quantity==1?'opacity-50':''" class="w-[2rem] select-none flex justify-center items-center bg-gray-600 hover:bg-gray-700 cursor-pointer"><Icon class="text-[1rem]" icon="tabler:minus"></Icon></div>
 										<div @click="quotationData.custom_web_customization.payment_gateway.quantity++; calculate()" class="w-[2rem] select-none flex justify-center items-center bg-gray-600 hover:bg-gray-700 cursor-pointer"><Icon class="text-[1rem]" icon="tabler:plus"></Icon></div>
-									</div>
+									</div> -->
 								</div>
 								<div :class="quotationData.custom_web_customization.payment_gateway.dropdown?'h-fit pt-3 pb-2 opacity-100':'h-0 opacity-0'" class="transition-all duration-300 border border-gray-500 border-t-0 bg-gray-800 px-4 rounded-b-lg mt-[-0.3rem] z-[9] overflow-clip">
 									<div class="flex justify-between items-center w-full text-lg">
@@ -1045,12 +1086,23 @@
 								<Icon class="text-lg" icon="mdi:printer" />
 								Print quotation
 							</button>
+							<button @click="depositLayoutActive=true; print();" class="text-white hover:text-black hover:bg-white transition-colors flex items-center gap-2 border border-white py-2 px-4 rounded-xl">
+								<Icon class="text-lg" icon="mdi:printer" />
+								Print deposit
+							</button>
+							<button @click="fullyPaidLayoutActive=true; print();" class="text-white hover:text-black hover:bg-white transition-colors flex items-center gap-2 border border-white py-2 px-4 rounded-xl">
+								<Icon class="text-lg" icon="mdi:printer" />
+								Print fully paid
+							</button>
 						</div>
 						<p class="mt-2 text-sm">You can save this your quotation by clicking on print above and "choose save as PDF" or anything similar, then print.</p>
 						<div class="relative mt-5 bg-white text-black font-[calibri] rounded-xl w-full px-8 py-6">
-							<h1 class="font-bold text-2xl">Quotation Statement</h1>
+							<div class="w-full flex justify-between items-center">
+								<h1 class="font-bold text-2xl">{{ depositLayoutActive||fullyPaidLayoutActive? 'Invoice' : 'Quotation Statement' }}</h1>
+								<p><span class="font-semibold">Date Issued:</span> {{ currentDate }}</p>
+							</div>
 
-							<div class="mt-5 border rounded-xl border-black">
+							<div v-if="!depositLayoutActive" class="mt-5 border rounded-xl border-gray-500">
 								<div class="w-full p-3 rounded-t-xl text-gray-500 font-semibold bg-gray-100 flex items-center justify-between relative">
 									<p class="w-2/4">Name</p>
 									<p class="w-1/4">Price Per Item</p>
@@ -1233,17 +1285,55 @@
 											<p class="w-1/4">RM {{ quotationData.custom_web_customization.maintenance.price * quotationData.custom_web_customization.maintenance.quantity }}</p>
 										</div>
 									</div>
+
+									<div v-if="fullyPaidLayoutActive">
+										<div class="mt-3 w-full h-[1px] bg-gray-300"></div>
+										<div v-if="fullyPaidLayoutActive" class="mt-3 w-full flex items-center justify-between relative">
+											<p class="w-2/4">Deposit {{ totalAmount<=500? '80%' : '50%' }}</p>
+											<p class="w-1/4">RM {{ -(totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</p>
+											<p class="w-1/4">RM {{ -(totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</p>
+										</div>
+									</div>
 								</div>
-								<div class="w-full p-3 mt-3 border-t border-black">
+								<div class="w-full p-3 mt-3 border-t border-gray-500">
 									<div class="w-full flex items-center justify-between relative">
 										<p class="w-2/4 text-lg font-bold">Total</p>
 										<p class="w-1/4"></p>
-										<p class="w-1/4 text-lg font-bold">RM {{ totalAmount }}</p>
+										<p v-if="fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount - (totalAmount * (totalAmount<=500? 0.8 : 0.5))).toFixed(2) }}</p>
+										<p v-if="!fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount).toFixed(2) }}</p>
 									</div>
 									<div class="w-full flex items-center justify-between relative">
 										<p class="w-2/4 text-lg font-bold">Estimated delivery time.</p>
 										<p class="w-1/4"></p>
-										<p class="w-1/4 text-lg font-bold">RM {{ totalDays }}</p>
+										<p class="w-1/4 text-lg font-bold">{{ totalDays }} days</p>
+									</div>
+								</div>
+							</div>
+						
+							<div v-if="depositLayoutActive">
+								<div class="mt-5 border rounded-xl border-gray-500">
+									<div class="w-full p-3 rounded-t-xl text-gray-500 font-semibold bg-gray-100 flex items-center justify-between relative">
+										<p class="w-6/12">Item</p>
+										<p class="w-2/12">Quantity</p>
+										<p class="w-2/12">Price</p>
+										<p class="w-2/12">Amount</p>
+									</div>
+
+									<div class="p-3">
+										<div class="flex items-center">
+											<div class="w-6/12">Deposit {{ totalAmount<=500? '80%' : '50%' }}</div>
+											<div class="w-2/12">1</div>
+											<div class="w-2/12">RM {{ (totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</div>
+											<div class="w-2/12">RM {{ (totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</div>
+										</div>
+									</div>
+
+									<div class="w-full p-3 mt-3 border-t border-gray-500">
+										<div class="w-full flex items-center justify-between relative">
+											<p class="w-1/2 text-lg font-bold">Total</p>
+											<p class="w-1/6"></p>
+											<p class="w-1/6 text-lg font-bold">RM {{ (totalAmount * (totalAmount<=500? 0.8 : 0.5)).toFixed(2) }}</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1258,7 +1348,7 @@
 				</div>
 				<div class="flex items-center justify-end gap-5">
 					<p class="whitespace-nowrap">Total:</p>
-					<p class="text-3xl whitespace-nowrap">RM{{ totalAmount }}</p>
+					<p class="text-3xl whitespace-nowrap">RM{{ (totalAmount).toFixed(2) }}</p>
 				</div>
 			</div>
 		</div>
@@ -1269,7 +1359,12 @@
 import { ref, onMounted } from 'vue';
 
 const printLayout = ref(null);
+const depositLayoutActive = ref(false);
+const fullyPaidLayoutActive = ref(false);
 const printLayoutActive = ref(false); 
+
+const date = new Date();
+const currentDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
 
 const totalAmount = ref(0);
 const totalDays = ref(0);
@@ -1541,6 +1636,8 @@ const print = () => {
       setTimeout(() => {
         const resetPrintLayout = () => {
           printLayoutActive.value = false;
+	    depositLayoutActive.value = false;
+	    fullyPaidLayoutActive.value = false;
           window.removeEventListener('afterprint', resetPrintLayout);
         };
         
