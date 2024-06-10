@@ -206,8 +206,8 @@
 					<p v-if="fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount - (totalAmount * (totalAmount<=500? 0.8 : 0.5))).toFixed(2) }}</p>
 					<p v-if="!fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount).toFixed(2) }}</p>
 				</div>
-				<div class="w-full flex items-center justify-between relative">
-					<p class="w-2/4 text-lg font-bold">Estimated delivery time.</p>
+				<div v-if="!fullyPaidLayoutActive" class="w-full flex items-center justify-between relative">
+					<p class="w-2/4 text-lg font-bold">Estimated delivery time</p>
 					<p class="w-1/4"></p>
 					<p class="w-1/4 text-lg font-bold">{{ totalDays }} days</p>
 				</div>
@@ -1302,8 +1302,8 @@
 										<p v-if="fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount - (totalAmount * (totalAmount<=500? 0.8 : 0.5))).toFixed(2) }}</p>
 										<p v-if="!fullyPaidLayoutActive" class="w-1/4 text-lg font-bold">RM {{ (totalAmount).toFixed(2) }}</p>
 									</div>
-									<div class="w-full flex items-center justify-between relative">
-										<p class="w-2/4 text-lg font-bold">Estimated delivery time.</p>
+									<div v-if="!fullyPaidLayoutActive" class="w-full flex items-center justify-between relative">
+										<p class="w-2/4 text-lg font-bold">Estimated delivery time</p>
 										<p class="w-1/4"></p>
 										<p class="w-1/4 text-lg font-bold">{{ totalDays }} days</p>
 									</div>
