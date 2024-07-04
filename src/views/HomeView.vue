@@ -259,7 +259,7 @@
 					<h1 class="text-xl font-semibold text-[#FFDD53]">Packages</h1>
 					<div class="mt-5 flex w-full lg:flex-row md:flex-col sm:flex-col items center gap-5">
 						<div 
-							@click="quotationData.landing_page.checked=!quotationData.landing_page.checked;quotationData.ecommerce.checked=false; calculate()" 
+							@click="quotationData.landing_page.checked=!quotationData.landing_page.checked;quotationData.ecommerce.checked=false; initiateOptions(); calculate()" 
 							draggable="false"
 							class="lg:w-1/3 md:w-full sm:w-full relative border-2 rounded-xl p-5 hover:border-[#FFDD53] cursor-pointer"
 							:class="quotationData.landing_page.checked? 'border-[#FFDD53]':'border-gray-500'"
@@ -273,7 +273,7 @@
 							</div>
 						</div>
 						<!-- <div 
-							@click="quotationData.ecommerce.checked=!quotationData.ecommerce.checked;quotationData.landing_page.checked=false; calculate()" 
+							@click="quotationData.ecommerce.checked=!quotationData.ecommerce.checked;quotationData.landing_page.checked=false; initiateOptions(); calculate()" 
 							draggable="false"
 							class="lg:w-1/3 md:w-full sm:w-full relative border-2 rounded-xl p-5 hover:border-[#FFDD53] cursor-pointer"
 							:class="quotationData.ecommerce.checked? 'border-[#FFDD53]':'border-gray-500'"
@@ -289,7 +289,7 @@
 							</div>
 						</div>
 						<div 
-							@click="quotationData.custom.checked=!quotationData.custom.checked;quotationData.ecommerce.checked=false; calculate()" 
+							@click="quotationData.custom.checked=!quotationData.custom.checked;quotationData.ecommerce.checked=false; initiateOptions(); calculate()" 
 							draggable="false"
 							class="lg:w-1/3 md:w-full sm:w-full relative border-2 rounded-xl p-5 hover:border-[#FFDD53] cursor-pointer"
 							:class="quotationData.custom.checked? 'border-[#FFDD53]':'border-gray-500'"
@@ -439,7 +439,7 @@
 
 						<h1 class="text-xl font-semibold mt-8">Service</h1>
 						<div class="mt-3 grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 gap-5">
-							<div class="flex flex-col w-full">
+							<!-- <div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
 									<input @change="calculate"  v-model="quotationData.landing_page_customization.revision.checked" type="checkbox" id="section" class="hidden" >
 									<div 
@@ -483,7 +483,7 @@
 										<div class="">RM{{ quotationData.landing_page_customization.faster_delivery.price }}</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 		
 							<div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
@@ -507,7 +507,7 @@
 								</div>
 							</div>
 		
-							<!-- <div class="flex flex-col w-full">
+							<div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
 									<input @change="calculate"  v-model="quotationData.landing_page_customization.custom_design.checked" type="checkbox" id="section" class="hidden" >
 									<div 
@@ -531,9 +531,9 @@
 										<p class="mt-1">Deselecting this requires provided design to the developer.</p>
 									</div>
 								</div>
-							</div> -->
+							</div>
 		
-							<div class="flex flex-col w-full">
+							<!-- <div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
 									<input @change="calculate"  v-model="quotationData.landing_page_customization.maintenance.checked" type="checkbox" id="section" class="hidden" >
 									<div 
@@ -558,7 +558,7 @@
 										Applies per page.
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 
@@ -900,7 +900,7 @@
 								</div>
 							</div>
 
-							<div class="flex flex-col w-full">
+							<!-- <div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
 									<input @change="calculate"  v-model="quotationData.custom_web_customization.animation.checked" type="checkbox" id="section" class="hidden" >
 									<div 
@@ -924,7 +924,7 @@
 										Applies per page
 									</div>
 								</div>
-							</div>
+							</div> -->
 		
 							<div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
@@ -955,7 +955,7 @@
 
 						<h1 class="text-xl font-semibold mt-8">Service</h1>
 						<div class="mt-3 grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 gap-5">
-							<div class="flex flex-col w-full">
+							<!-- <div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
 									<input @change="calculate"  v-model="quotationData.custom_web_customization.revision.checked" type="checkbox" id="section" class="hidden" >
 									<div 
@@ -999,7 +999,7 @@
 										<div class="">RM{{ quotationData.custom_web_customization.faster_delivery.price }}</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 		
 							<div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
@@ -1049,7 +1049,7 @@
 								</div>
 							</div>
 		
-							<div class="flex flex-col w-full">
+							<!-- <div class="flex flex-col w-full">
 								<div class="flex relative z-10 items-center bg-gray-800 border border-white rounded-lg overflow-clip">
 									<input @change="calculate"  v-model="quotationData.custom_web_customization.maintenance.checked" type="checkbox" id="section" class="hidden" >
 									<div 
@@ -1074,7 +1074,7 @@
 										Applies per page.
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 
 					</div>
@@ -1371,7 +1371,7 @@ const totalDays = ref(0);
 
 const quotationData = ref({
 	landing_page: {
-		price: 349,
+		price: 400,
 		checked: false,
 		duration: 7,
 	},
@@ -1429,14 +1429,14 @@ const quotationData = ref({
 			quantity: 1,
 		},
 		hosting_setup: {
-			price: 70,
+			price: 100,
 			checked: false,
 			dropdown: false,
 			duration: 3,
 			quantity: 1,
 		},
 		custom_design: {
-			price: 100,
+			price: 150,
 			checked: false,
 			dropdown: false,
 			quantity: 1,
@@ -1566,14 +1566,14 @@ const quotationData = ref({
 			quantity: 1,
 		},
 		hosting_setup: {
-			price: 70,
+			price: 150,
 			checked: false,
 			dropdown: false,
 			duration: 3,
 			quantity: 1,
 		},
 		custom_design: {
-			price: 100,
+			price: 170,
 			checked: false,
 			dropdown: false,
 			quantity: 1,
@@ -1588,6 +1588,17 @@ const quotationData = ref({
 		},
 	},
 });
+
+const initiateOptions = () => {
+	// custom customs
+	quotationData.value.custom_web_customization.responsive.checked = quotationData.value.custom.checked? true : false;
+	quotationData.value.custom_web_customization.hosting_setup.checked = quotationData.value.custom.checked? true : false;
+	quotationData.value.custom_web_customization.custom_design.checked = quotationData.value.custom.checked? true : false;
+
+	// landing page customs
+	quotationData.value.landing_page_customization.hosting_setup.checked = quotationData.value.landing_page.checked? true : false;
+	quotationData.value.landing_page_customization.custom_design.checked = quotationData.value.landing_page.checked? true : false;
+}
 
 const calculate = () => {
 	totalDays.value = quotationData.value.custom.checked? quotationData.value.custom_web_customization.admin_dashboard.duration : 0;
